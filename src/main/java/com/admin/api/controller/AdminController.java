@@ -1,5 +1,6 @@
 package com.admin.api.controller;
 
+import com.admin.api.exception.NoUsersReturnedException;
 import com.admin.api.model.Post;
 import com.admin.api.model.User;
 import com.admin.api.model.UserWithPosts;
@@ -43,7 +44,7 @@ public class AdminController {
         List<Post> posts = getPostsFromApi();
 
         if(users==null || users.isEmpty()) {
-            throw new RuntimeException(USER_ERROR);
+            throw new NoUsersReturnedException(USER_ERROR);
         }
 
         List<Post> noPosts = new ArrayList<Post>();
