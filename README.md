@@ -1,8 +1,9 @@
 Admin API Project:
 
 Software Pre-Requisites:
-Java - Java 11 and above, can be downloaded here https://www.java.com/en/download/ or https://developer.ibm.com/languages/java/semeru-runtimes/downloads/ and installed (https://www.java.com/en/download/help/download_options.html)
-Maven - Can use the latest version and can be downloaded here https://maven.apache.org/download.cgi and installed (https://www.baeldung.com/install-maven-on-windows-linux-mac)
+Java - Java 11 and above, can be downloaded here https://www.java.com/en/download/ or https://developer.ibm.com/languages/java/semeru-runtimes/downloads/ and installed (how to - https://www.java.com/en/download/help/download_options.html)
+
+Maven - Can use the latest version and can be downloaded here https://maven.apache.org/download.cgi and installed (how to - https://www.baeldung.com/install-maven-on-windows-linux-mac)
 
 Java Technology used: Spring Boot
 
