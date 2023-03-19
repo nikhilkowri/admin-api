@@ -34,7 +34,8 @@ public class AdminController {
     @ApiOperation(value = "get list of users with posts", response = UserWithPosts[].class, produces = "application/json")
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "Successfully retrieved list of users with posts"),
-            @ApiResponse(code = 500, message = "User API did not return any users/Exception message that occured")
+            @ApiResponse(code = 417, message = USER_ERROR),
+            @ApiResponse(code = 500, message = "Internal Server Error: Exception message that occured")
     })
     @GetMapping("/users-with-posts")
     public List<UserWithPosts> getUsersWithPosts() {
@@ -45,30 +46,41 @@ public class AdminController {
             throw new RuntimeException(USER_ERROR);
         }
 
-        List<Post> empty = new ArrayList<Post>();
+        List<Post> noPosts = new ArrayList<Post>();
 
         List<UserWithPosts> result = new ArrayList<>();
-        Map<Integer,List<Post>> postMap = null;
+        Map<Integer,List<Post>> postsMap = null;
         if(posts!=null && !posts.isEmpty()) {
-            postMap = posts.stream().collect(Collectors.groupingBy(Post::getUserId));
-        } else {
-            postMap = new HashMap<Integer,List<Post>>();
+            postsMap = posts.stream().collect(Collectors.groupingBy(Post::getUserId));
         }
-        for (User user : users) {
-            List<Post> userPosts = postMap.get(user.getId());
 
-            UserWithPosts userWithPosts = new UserWithPosts(user, (userPosts==null)?empty:userPosts);
-            result.add(userWithPosts);
+        if(postsMap==null) {
+            users.forEach((user) -> {
+                result.add(new UserWithPosts(user, noPosts));
+            });
+        } else {
+            for (User user : users) {
+                List<Post> userPosts = postsMap.get(user.getId());
+                result.add(new UserWithPosts(user, (userPosts == null) ? noPosts : userPosts));
+            }
         }
         return result;
     }
 
+    /**
+     * gets all the users received from user api
+     * @return List<User> List of users
+     */
     private List<User> getUsersFromApi() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<User[]> response = restTemplate.getForEntity(USERS_URL, User[].class);
         return Arrays.asList(response.getBody());
     }
 
+    /**
+     * gets all the posts received from posts api
+     * @return List<Post> List of all posts
+     */
     private List<Post> getPostsFromApi() {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Post[]> response = restTemplate.getForEntity(POSTS_URL, Post[].class);
