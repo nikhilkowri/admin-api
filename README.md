@@ -24,7 +24,8 @@ mvn spring-boot:run
 
 The embedded tomcat server will start the application listening at port 8080.
 The admin api documentation is available at http://localhost:8080/swagger-ui/.
-The admin api can be accessed using http://localhost:8080/admin/users-with-posts in any browser. The user information with their related posts data is displayed in json format.
+
+The admin api can be accessed using http://localhost:8080/admin/users-with-posts in any browser, the user information with their related posts data is displayed in json format.
 
 4. Application can be stopped using 
 mvn spring-boot:stop or ctrl + z command.
@@ -35,3 +36,4 @@ If port 8080 is already in use then u will get an error when u start the spring 
 1. open admin-api/src/main/resources/application.properties in a text editor.
 2. add server.port=9090 or any other port number in applications.properties and save the file.
 3. Go back to - How to Build and Run the project and redo the 3 steps.
+4. Replace the 8080 port in the url with your port and access it, for example changed the port to 9090 and urls are http://localhost:9090/swagger-ui/ and http://localhost:9090/admin/users-with-posts
