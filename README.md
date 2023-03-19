@@ -8,11 +8,11 @@ Maven - Can use the latest version and can be downloaded here https://maven.apac
 
 Java Technology used: Spring Boot
 
-Download the code from the project https://github.com/nikhilkowri/admin-api and unzip it. Go to admin-api folder of the project.
+Download the code from the project https://github.com/nikhilkowri/admin-api and unzip it. Go to admin-api-main folder of the project.
 
 How to Build and Run the project
 
-1. Open a command prompt or terminal and navigate to the root directory of your Spring Boot project (admin-api folder of the project).
+1. Open a command prompt or terminal and navigate to the root directory of your Spring Boot project (admin-api-main folder of the project).
 2. Use the following command to build a jar file:
 mvn clean package
 This will build the project, run the tests and package it into a jar file in the "target" directory.
